@@ -11,7 +11,7 @@ callout-appearance: simple
 linestretch: 2
 other-links:
     - text: Exercise zip data
-      href: files/shell-tutorial.zip
+      href: ../files/shell-tutorial.zip
 ---
 
 ## Background
