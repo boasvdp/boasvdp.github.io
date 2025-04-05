@@ -1,0 +1,30 @@
+---
+title: "Boas van der Putten"
+subtitle: "EUPHEM fellow, RIVM"
+title-block-banner: false
+toc: false
+sidebar: false
+about:
+  template: jolla
+  image-shape: round
+  image: img/photo.JPG
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/boasvdp
+    - icon: file-earmark-text
+      text: Publications
+      href: https://scholar.google.com/citations?user=FTBCjHMAAAAJ
+    - icon: person-check
+      text: "ORCID"
+      href: https://orcid.org/0000-0002-7916-6665
+    - icon: linkedin
+      text: "LinkedIn"
+      href: https://www.linkedin.com/in/boas-van-der-putten/
+---
+
+I'm a public health microbiologist at the Dutch National Institute for Public Health and the Environment (RIVM).
+
+Currently, I'm enrolled in the [EUPHEM](https://www.ecdc.europa.eu/en/epiet-euphem) fellowship, organised by the European Center for Disease Prevention and Control (ECDC). The fellowship provides training and experience in microbiological and epidemiological methods for applied public health work. 
+
+I'm also one of the coordinators of the SIG-BIMM (Special Interest Group for Bioinformatics in Medical Microbiology), part of the [NVMM](https://www.nvmm.nl/). We organise symposia twice per year on microbial bioinformatics, and in general try to advance the field in the Netherlands. 

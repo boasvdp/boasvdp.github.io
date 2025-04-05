@@ -1,0 +1,757 @@
+---
+title: "Shell tutorial"
+toc: true
+toc-depth: 3
+toc-expand: true
+sidebar: false
+number-sections: true
+number-depth: 3
+code-annotations: below
+callout-appearance: simple
+linestretch: 2
+other-links:
+    - text: Exercise zip data
+      href: files/shell-tutorial.zip
+---
+
+## Background
+
+This page lays out the exercises to learn shell scripting. The exercises are also used in course X.
+
+A lot of material has been adapted from existing resources such as Data Carpentry's "Introduction to the Command Line for Genomics"[^1] and Software Carpentry's "The Unix Shell"[^2].
+
+### The command line
+
+Your command line interface probably looks something like this:
+
+```bash
+boas@mycomputer:~$
+```
+
+The `$` sign indicates the "prompt" and means that the shell is waiting for your input. The text before the `$` provides some basic information, usually which user is logged in (`boas`) at which machine (`mycomputer`) and what the current directory is (`~` or "home", we'll get to what that means).
+
+Most shells also have a "cursor", which indicates where typed text will appear. Usually, the cursor is a flashing block or line.
+
+Commands are run by typing them and pressing "Enter". You can move the cursor using left and right arrows. In most shells, you can **not** change the position of the cursor by clicking with your mouse.
+
+### Practical tips
+
+- **Copying and pasting**: You can copy text from the command line by selecting it with your mouse. To paste, right-click in the terminal window.
+- **Command history**: You can use the up and down arrow keys to scroll through your command history. This is useful for repeating commands or correcting mistakes.
+- **Tab completion**: You can use the `Tab` key to auto-complete file and directory names. This is useful for long or complex names. Double-tapping the `Tab` key will show you all possible completions.
+- **Command line shortcuts**: 
+  - `Ctrl + C`: Cancel the current command.
+  - `Ctrl + Z`: Suspend the current command.
+  - `Ctrl + D`: Log out of the shell or close the terminal window.
+  - `Ctrl + L`: Clear the screen.
+- **Command line help**: You can use the `man` command to get help on any command. For example, `man ls` will show you the manual page for the `ls` command.
+
+## Exercises 
+
+Download the zip file with the exercises from the link in the right sidebar. Either download by left-clicking and save this in your home directory, or use this command:
+
+```
+wget <LINK TO BE INSERTED>
+unzip shell-tutorial.zip
+```
+
+### Navigating a file system
+
+These couple of exercises will demonstrate how you can move throughout your file system.
+
+#### Check your current working directory
+
+Let's first check where we are by running `pwd`:
+
+```bash
+pwd
+```
+Returns: 
+
+```
+/home/boas/shell-tutorial
+```
+
+Where `boas` will be replaced by your own user name.
+
+---
+
+Let's see what the contents of this directory are:
+
+```bash
+ls
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+Four different directories are present:
+
+```
+01_navigation  02_files  03_pipes  04_scripting
+```
+:::
+
+---
+
+#### Changing directories
+
+Now, `cd` into the directory for this exercise and check the contents of this directory:
+
+```bash
+cd 01_navigation
+ls
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+project_A  project_B
+```
+:::
+
+---
+
+We'll need to `cd` into the first directory and check its contents. How would you do this?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+You can run these commands:
+```bash
+cd project_A
+ls
+```
+Which returns:
+```
+data  report.txt
+```
+:::
+
+---
+
+Suddenly you remember you already wrote a report for this project, and need to work on the other project. We'll need to navigate to the other project's directory.
+
+Try running `cd project_B` and see if this takes you to the other project's directory. Why doesn't this work?
+
+:::  {.callout-note collapse="true" title="Answer" icon="false"}
+The directory `project_B` is not present in your current directory. 
+
+You can confirm this by running `ls` on your working directory.
+:::
+
+So how would you get to this other directory using `ls` and `cd`?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+From the project_A directory, you could `ls` the parent directory: 
+```bash
+ls ..
+```
+Which would (again) show you:
+```
+project_A  project_B
+```
+
+With `ls` you are just listing contents. To actually go into the project_B directory, you would need to use `cd`:
+```bash
+cd ..
+cd project_B
+```
+
+Or in one go: `cd ../project_B`
+:::
+
+::: {.callout-tip}
+Remember, if you ever get lost, the command `cd ~` will return you to your home directory. This is also accomplished by just running `cd` without any argument.
+:::
+
+---
+
+#### Absolute paths
+
+We have been using relative paths so far, but let's see if we can go to another directory using absolute paths. This will require some puzzling.
+
+Start off by checking your current working directory using `pwd` (returning `/home/boas/shell-tutorial/01_navigation/project_B` for me).
+
+Remembering the `project_A` directory is "next to" the `project_B` directory, how could we use `cd` to this directory using an absolute path?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```bash
+cd /home/boas/shell-tutorial/01_navigation/project_A
+```
+Where `boas` is replaced by your username.
+
+When getting acquainted with navigating file systems, it might help to draw a (mental) picture of the system like this:
+
+![Absolute path example](../img/shell-tutorial/abspath.png){width=400}
+:::
+
+### Viewing and changing files
+
+#### Printing the contents of a file
+
+Let’s start with some basic file inspection tools.
+
+We'll begin by taking a look at the contents of our linelist in CSV format.
+
+```bash
+cat data/linelist.csv
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+caseID,date
+1,2025-06-21
+2,2025-06-21
+3,2025-06-22
+4,2025-06-22
+5,2025-06-22
+6,2025-06-23
+7,2025-06-23
+8,2025-06-23
+9,2025-06-23
+10,2025-06-24
+11,2025-06-24
+12,2025-06-24
+13,2025-06-24
+14,2025-06-25
+15,2025-06-25
+16,2025-06-25
+17,2025-06-25
+18,2025-06-25
+19,2025-06-26
+20,2025-06-26
+21,2025-06-26
+22,2025-06-26
+```
+:::
+
+What does `cat` do here?
+
+::: {.callout-tip}
+The `cat` command ("concatenate") reads files and writes them to standard output. In this case, it just prints the contents of the file.
+:::
+
+---
+
+What if you only want to see the first ten lines of the file?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+Try:
+
+```bash
+head data/linelist.csv
+```
+
+```
+caseID,date
+1,2025-06-21
+2,2025-06-21
+3,2025-06-22
+4,2025-06-22
+5,2025-06-22
+6,2025-06-23
+7,2025-06-23
+8,2025-06-23
+9,2025-06-23
+```
+:::
+
+Now try limiting it to just the first 2 lines:
+
+```bash
+head -n 2 data/linelist.csv
+```
+
+How would you do the reverse — see the last two lines?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+Use the `tail` command:
+
+```bash
+tail -n 2 data/linelist.csv
+```
+:::
+
+---
+
+#### Viewing large files
+If you want to see the entire file, you can use `cat`, but this is not very practical for large files.
+
+Let’s try another useful command for inspecting larger files: `less`.
+
+```bash
+less data/linelist.csv
+```
+
+::: {.callout-tip}
+`less` opens a temporary view and will not print anything.
+
+You can scroll through the file with the arrow keys, or press `q` to quit.
+:::
+
+---
+
+Another method could be extracting just the lines you're interested in from a large file.
+
+Suppose you want to find all cases from June 21st, 2025.
+
+Try using `grep`:
+
+```bash
+grep "2025-06-21" data/linelist.csv
+```
+
+Looking at the answer, is there anything missing from the output? Why?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+1,2025-06-21
+2,2025-06-21
+```
+
+The header row is not printed (does not contain the string "2025-06-21").
+:::
+
+---
+
+#### Copying, moving and removing files
+
+Let’s now learn how to make a copy of a file.
+
+Make a backup of the linelist:
+
+```bash
+cp data/linelist.csv data/linelist_backup.csv
+```
+
+Use `ls` to confirm the file was copied:
+
+```bash
+ls data/
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+linelist.csv  linelist_backup.csv
+```
+:::
+
+---
+
+Let’s rename the backup file using `mv` to `linelist_old.csv`. How would you do this?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```bash
+mv data/linelist_backup.csv data/linelist_old.csv
+```
+:::
+
+Check the result again with `ls`.
+
+What would happen if you ran the `mv` command with an existing file name?
+
+::: {.callout-tip}
+The existing file would be overwritten without warning unless you use the `-i` (interactive) option:
+
+```bash
+mv -i file1 file2
+```
+:::
+
+---
+
+We now have an outdated file that we no longer need. Let’s remove it.
+
+```bash
+rm data/linelist_old.csv
+```
+
+Check again:
+
+```bash
+ls data/
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+linelist.csv
+```
+:::
+
+**⚠️ Be careful with `rm`!** Once you delete a file this way, it does not go to a trash bin.
+
+---
+
+#### Creating and editing files
+
+Now, let’s edit a file.
+
+Let’s open the report in a text editor:
+
+```bash
+nano reports/my_report.txt
+```
+
+Try adding a line like:
+
+```
+Summary written on June 23, 2025.
+```
+
+::: {.callout-tip}
+
+To save your changes:
+
+- Press `Ctrl + O` (to write out)
+- Press `Enter` (to confirm)
+- Press `Ctrl + X` (to exit)
+:::
+
+Check the result:
+
+```bash
+cat reports/my_report.txt
+```
+
+---
+
+Let’s say you want to move the report to the `data/` directory instead of `reports/`.
+
+```bash
+mv reports/my_report.txt data/
+```
+
+Now list both directories:
+
+```bash
+ls reports/
+ls data/
+```
+
+Has the file name of the report changed?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+The file `my_report.txt` should now appear in `data/` and be gone from `reports/`. However, the file has not been renamed, just moved.
+
+Compare these commands for example:
+```bash
+mv file.txt directory1/ # <1>
+mv file.txt other_file.txt # <2>
+mv file.txt directory1/other_file.txt # <3>
+```
+1. Moves `file.txt` to `directory1/` and keeps the same name.
+2. Renames `file.txt` to `other_file.txt` in the current directory.
+3. Moves `file.txt` to `directory1/` and renames it to `other_file.txt`.
+:::
+
+
+### Pipes and redirection
+
+In this section, we’ll learn how to redirect output into files and how to use pipes to chain commands together.
+
+#### Redirecting output
+
+Let’s try redirecting the standard output (STDOUT) of a command to a file.
+
+```bash
+ls data > overviews/files_list.txt
+```
+
+What are the contents of the newly created file?
+
+```bash
+cat overviews/files_list.txt
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+linelist.csv
+```
+:::
+
+Now append another line to this file, by `echo`-ing a string to STDOUT:
+
+```bash
+echo "More data files may appear here." >> overviews/files_list.txt
+```
+
+View it again:
+
+```bash
+cat overviews/files_list.txt
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+linelist.csv
+More data files may appear here.
+```
+:::
+
+---
+
+#### Pipes
+
+We can use pipes to connect commands, just as in R. Start by showing the last ten cases in our linelist:
+
+```bash
+tail data/linelist.csv
+```
+
+::: {.callout-tip}
+The `cut` command can be used to extract specific columns from a file.
+
+The `-d` flag specifies the delimiter (in this case, a comma), and the `-f` flag specifies which field to extract.
+
+Check `man cut` for more details.
+:::
+
+Now let’s say we want to see the last ten cases, but only the dates. We can do this by piping the output of `tail` into `cut`:
+
+```bash
+tail data/linelist.csv | cut -d',' -f2
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+2025-06-24
+2025-06-25
+2025-06-25
+2025-06-25
+2025-06-25
+2025-06-25
+2025-06-26
+2025-06-26
+2025-06-26
+2025-06-26
+```
+:::
+
+Let’s count how many times each date appears:
+
+::: {.callout-tip}
+`uniq` is used to deduplicate lines. Use `man uniq` to see what flag `-c` does.
+
+⚠️ `uniq` only deduplicates adjacent lines, so you typically sort the output first.
+:::
+
+```bash
+tail data/linelist.csv | cut -d',' -f2 | sort | uniq -c
+```
+
+Which data is most common in the last ten cases?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+      1 2025-06-24
+      4 2025-06-25
+      5 2025-06-26
+```
+The most common date is `2025-06-26`, which appears 5 times.
+
+Bonus question: can you sort this output on a descending number of cases? Check `man sort` for some ideas.
+:::
+
+### Scripting
+
+#### Variables
+
+You can define a variable like this:
+
+```bash
+GREETING="Hello"
+```
+
+How would you assign your own name to the variable `NAME`?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+In my case:
+```bash
+NAME="Boas"
+```
+:::
+
+You can reference them like this, using the `$` sign:
+
+```bash
+echo $GREETING $NAME
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+Hello Boas
+```
+:::
+
+---
+
+#### Quoting: single vs. double quotes
+
+What happens when we use single quotes instead?
+
+```bash
+echo "$GREETING $NAME"
+echo '$GREETING $NAME'
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+Hello Boas
+$GREETING $NAME
+```
+
+Single quotes **do not** evaluate variables, while double quotes **do**.
+:::
+
+---
+
+#### The importance of quoting variables
+
+Let’s say you want to copy a file whose name is stored in a variable. However, the file name contains a space:
+
+```bash
+FILENAME="sequences/complex name.fasta"
+
+cp $FILENAME temp/
+```
+
+What happens?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+This will try to copy **two** files: `sequences/complex` and `name.fasta`, which likely don't exist!
+:::
+
+The correct approach is:
+
+```bash
+cp "$FILENAME" temp/
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+This safely copies the file with a space in the name.
+
+```bash
+ls temp/
+```
+
+```
+complex name.fasta
+```
+:::
+
+---
+
+#### Wildcards
+
+Let’s list all `.fasta` files:
+
+```bash
+ls sequences/*.fasta
+```
+
+What if we only want files that start with `sample`?
+
+```bash
+ls sequences/sample*.fasta
+```
+
+Which sample is not found using the below code?
+
+```bash
+ls sequences/sample?.fasta
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+This matches files like `sample1.fasta` and `sample2.fasta`, etc. It expects exactly one character after `sample`.
+
+The file `sample404.fasta` is not found, as `?` does not match the string `404`.
+:::
+
+---
+
+#### Writing and running a simple loop
+
+Let’s create a script that prints a message for every sequence file.
+
+Open the script using nano:
+
+```bash
+nano loop_sequences.sh
+```
+
+Paste the following into the file:
+
+```
+#!/bin/bash
+
+for file in sequences/*.fasta
+do
+  echo "Processing file: $file"
+done
+```
+
+Save and exit (`Ctrl+O`, `Enter`, then `Ctrl+X`).
+
+Then run the script using:
+
+```bash
+bash loop_sequences.sh
+```
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+Processing file: sequences/sample1.fasta
+Processing file: sequences/sample2.fasta
+Processing file: sequences/sample404.fasta
+Processing file: sequences/complex name.fasta
+```
+:::
+
+---
+
+#### Using a pipe in a for loop
+
+As with many things in bash, you can combine different concepts to achieve more complex tasks.
+
+Let’s say you want to count the number of sequences in each file. You can do this by using `wc -l` to count the lines in the file, and then use `cut` to extract just the number of lines.
+
+Open the script again:
+```bash
+nano loop_sequences.sh
+```
+
+And replace the contents with the following:
+
+```bash
+for file in sequences/*.fasta
+do
+  echo "Processing file: $file"
+  wc -l "$file" | cut -d' ' -f1
+done
+```
+
+Save and run the script again. Which file contains most lines?
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```
+Processing file: sequences/complex name.fasta
+2
+Processing file: sequences/sample1.fasta
+2
+Processing file: sequences/sample2.fasta
+6
+Processing file: sequences/sample404.fasta
+1
+```
+The file `sample2.fasta` contains the most lines (6).
+:::
+
+
+## Conclusions
+
+
+## References
+
+[^1]: Erin Alison Becker, Anita Schürch, Tracy Teal, Sheldon John McKay, Jessica Elizabeth Mizzi, 
+François Michonneau, et al. (2019, June). datacarpentry/shell-genomics: Data Carpentry: Introduction to the shell for genomics data, 
+June 2019 (Version v2019.06.1). Zenodo. http://doi.org/10.5281/zenodo.3260560
+[^2]: Gabriel A. Devenyi (Ed.), Gerard Capes (Ed.), Colin Morris (Ed.), Will Pitchers (Ed.),
+Greg Wilson, Gerard Capes, Gabriel A. Devenyi, Christina Koch, Raniere Silva, Ashwin Srinath, … Vikram Chhatre.
+(2019, July). swcarpentry/shell-novice: Software Carpentry: the UNIX shell, June 2019 (Version v2019.06.1).
+Zenodo. http://doi.org/10.5281/zenodo.3266823

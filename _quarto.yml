@@ -1,0 +1,33 @@
+project:
+  type: website
+  output-dir: docs
+  preview:
+    port: 8080
+
+website:
+  title: "Boas van der Putten"
+  search:
+    location: sidebar
+  navbar:
+    collapse: false
+    right:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - text: Resources
+        menu:
+          - href: resources/shell-tutorial.qmd
+            text: Shell Tutorial
+  sidebar:
+    contents: auto
+
+format:
+  html:
+    link-external-newwindow: true
+    theme: flatly
+    css: styles.css
+    page-layout: full
+
+
+

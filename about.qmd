@@ -1,0 +1,28 @@
+---
+title: "About"
+sidebar: false
+about:
+    template: solana
+    image-shape: round
+---
+
+
+### Microbiology
+
+Although most methods I apply are bioinformatics-oriented, I consider myself primarily a microbiologist. My work has focused on *Escherichia coli*, vaccine-preventable pathogens (*N. meningitidis*, *H. influenzae*), invasive streptococci (*S. pyogenes*, *S. suis*) and other public health relevant pathogens such as TB, *Salmonella*, *Vibrio cholerae*, *Shigella sonnei*, *Candida auris* and *Aspergillus fumigatus*.
+
+### Bioinformatics
+
+During my PhD, postdoc and subsequent role at the RIVM I developed microbial bioinformatics skills, increasingly applied to public health problems. This ranges from building and maintaining Snakemake pipelines (https://github.com/orgs/RIVM-bioinformatics/repositories?q=juno) to implementing genomic typing tools (https://github.com/RIVM-bioinformatics/auriclass) to research analyses (https://doi.org/10.1186/s12915-023-01562-w).
+
+### Epidemiology
+
+One of the objectives of the EUPHEM fellowship is teaching public health microbiologists how to apply epidemiological methods, and the role that microbiology (including bioinformatics) plays in this. 
+
+## Jobs
+
+-  EUPHEM fellow, RIVM, 2024-2026
+-  Team lead microbial bioinformatics, RIVM, 2022-2024
+-  Postdoctoral researcher, NRLBM/Amsterdam UMC, 2021-2022
+-  PhD student, AIGHD/Amsterdam UMC, 2017-2021
+

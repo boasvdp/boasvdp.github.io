@@ -1,0 +1,60 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "GitHub\n  \n  \n    \n     Publications",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "About",
+    "section": "Experience",
+    "text": "Experience\n\nEUPHEM fellow, RIVM, 2024-2026\nTeam lead microbial bioinformatics, RIVM, 2022-2024\nPostdoctoral researcher, NRLBM, 2021-2022\nPhD student, AIGHD, 2017-2021",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Boas van der Putten",
+    "section": "",
+    "text": "I’m a public health microbiologist at the Dutch National Institute for Public Health and the Environment (RIVM).\nCurrently, I’m enrolled in the EUPHEM fellowship."
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "Here are some resources:",
+    "crumbs": [
+      "Home",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "about.html#this-is-different",
+    "href": "about.html#this-is-different",
+    "title": "About",
+    "section": "",
+    "text": "GitHub\n  \n  \n    \n     Publications",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Boas van der Putten",
+    "section": "Experience",
+    "text": "Experience\n\nbla"
+  }
+]
