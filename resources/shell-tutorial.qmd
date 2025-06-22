@@ -16,7 +16,7 @@ other-links:
 
 ## Background
 
-This page lays out the exercises to learn shell scripting. The exercises are also used in course X.
+This page lays out the exercises to learn shell scripting. The exercises are also used in the PHM III course for the ECDC fellowship.
 
 A lot of material has been adapted from existing resources such as Data Carpentry's "Introduction to the Command Line for Genomics"[^1] and Software Carpentry's "The Unix Shell"[^2].
 
@@ -41,7 +41,7 @@ Commands are run by typing them and pressing "Enter". You can move the cursor us
 - **Tab completion**: You can use the `Tab` key to auto-complete file and directory names. This is useful for long or complex names. Double-tapping the `Tab` key will show you all possible completions.
 - **Command line shortcuts**: 
   - `Ctrl + C`: Cancel the current command.
-  - `Ctrl + Z`: Suspend the current command.
+  - `Ctrl + Z`: Suspend the current command. Suspended commands can be resumed in the foreground (using `fg`) or in the background (`bg`).
   - `Ctrl + D`: Log out of the shell or close the terminal window.
   - `Ctrl + L`: Clear the screen.
 - **Command line help**: You can use the `man` command to get help on any command. For example, `man ls` will show you the manual page for the `ls` command.
@@ -86,7 +86,7 @@ ls
 ```
 
 ::: {.callout-note collapse="true" title="Answer" icon="false"}
-Four different directories are present:
+Four different directories should be present:
 
 ```
 01_navigation  02_files  03_pipes  04_scripting
@@ -97,7 +97,7 @@ Four different directories are present:
 
 #### Changing directories
 
-Now, `cd` into the directory for this exercise and check the contents of this directory:
+Now, `cd` into the directory for this exercise and check the contents of this directory (try out auto-completion by pressing `Tab`):
 
 ```bash
 cd 01_navigation
@@ -185,6 +185,8 @@ When getting acquainted with navigating file systems, it might help to draw a (m
 :::
 
 ### Viewing and changing files
+
+First, navigate to the `02_files` directory for the following exercises. 
 
 #### Printing the contents of a file
 
@@ -294,11 +296,14 @@ Another method could be extracting just the lines you're interested in from a la
 
 Suppose you want to find all cases from June 21st, 2025.
 
-Try using `grep`:
+Try using `grep` (using the command structure `grep <PATTERN> <FILE>`).
 
+::: {.callout-note collapse="true" title="Answer" icon="false"}
 ```bash
 grep "2025-06-21" data/linelist.csv
 ```
+
+:::
 
 Looking at the answer, is there anything missing from the output? Why?
 
@@ -349,7 +354,7 @@ Check the result again with `ls`.
 
 What would happen if you ran the `mv` command with an existing file name?
 
-::: {.callout-tip}
+::: {.callout-tip collapse="true" title="Answer" icon="false"}
 The existing file would be overwritten without warning unless you use the `-i` (interactive) option:
 
 ```bash
@@ -377,7 +382,7 @@ linelist.csv
 ```
 :::
 
-**⚠️ Be careful with `rm`!** Once you delete a file this way, it does not go to a trash bin.
+**⚠️ Be careful with `rm`!** Once you delete a file this way, you can usually not recover it from the trash bin.
 
 ---
 
@@ -391,6 +396,10 @@ Let’s open the report in a text editor:
 nano reports/my_report.txt
 ```
 
+::: {.callout-note}
+If you get an error similar to `nano: command not found`, let one of the facilitators know.
+:::
+
 Try adding a line like:
 
 ```
@@ -401,8 +410,7 @@ Summary written on June 23, 2025.
 
 To save your changes:
 
-- Press `Ctrl + O` (to write out)
-- Press `Enter` (to confirm)
+- Press `Ctrl + S` (to save)
 - Press `Ctrl + X` (to exit)
 :::
 
@@ -446,7 +454,7 @@ mv file.txt directory1/other_file.txt # <3>
 
 ### Pipes and redirection
 
-In this section, we’ll learn how to redirect output into files and how to use pipes to chain commands together.
+In this section, we’ll learn how to redirect output into files and how to use pipes to chain commands together. The files needed for these exercises are in the directory `03_pipes`.
 
 #### Redirecting output
 
@@ -456,13 +464,14 @@ Let’s try redirecting the standard output (STDOUT) of a command to a file.
 ls data > overviews/files_list.txt
 ```
 
-What are the contents of the newly created file?
+How would you check the contents of the newly created file?
 
-```bash
-cat overviews/files_list.txt
-```
 
 ::: {.callout-note collapse="true" title="Answer" icon="false"}
+For example using `less` or `cat`, maybe `head` or `tail`.
+
+In any case, the contents of the file should be:
+
 ```
 linelist.csv
 ```
@@ -474,11 +483,7 @@ Now append another line to this file, by `echo`-ing a string to STDOUT:
 echo "More data files may appear here." >> overviews/files_list.txt
 ```
 
-View it again:
-
-```bash
-cat overviews/files_list.txt
-```
+View the file contents again:
 
 ::: {.callout-note collapse="true" title="Answer" icon="false"}
 ```
@@ -493,8 +498,16 @@ More data files may appear here.
 
 We can use pipes to connect commands, just as in R. Start by showing the last ten cases in our linelist:
 
+::: {.callout-note collapse="true" title="Answer" icon="false"}
 ```bash
 tail data/linelist.csv
+```
+:::
+
+Now let’s say we want to see the last ten cases, but only the dates. We can do this by piping the output of `tail` into `cut`:
+
+```bash
+tail data/linelist.csv | cut -d',' -f2
 ```
 
 ::: {.callout-tip}
@@ -504,12 +517,6 @@ The `-d` flag specifies the delimiter (in this case, a comma), and the `-f` flag
 
 Check `man cut` for more details.
 :::
-
-Now let’s say we want to see the last ten cases, but only the dates. We can do this by piping the output of `tail` into `cut`:
-
-```bash
-tail data/linelist.csv | cut -d',' -f2
-```
 
 ::: {.callout-note collapse="true" title="Answer" icon="false"}
 ```
@@ -528,15 +535,15 @@ tail data/linelist.csv | cut -d',' -f2
 
 Let’s count how many times each date appears:
 
+```bash
+tail data/linelist.csv | cut -d',' -f2 | sort | uniq -c
+```
+
 ::: {.callout-tip}
 `uniq` is used to deduplicate lines. Use `man uniq` to see what flag `-c` does.
 
 ⚠️ `uniq` only deduplicates adjacent lines, so you typically sort the output first.
 :::
-
-```bash
-tail data/linelist.csv | cut -d',' -f2 | sort | uniq -c
-```
 
 Which data is most common in the last ten cases?
 
@@ -552,6 +559,8 @@ Bonus question: can you sort this output on a descending number of cases? Check 
 :::
 
 ### Scripting
+
+Navigate to `04_scripting` for these exercises.
 
 #### Variables
 
@@ -586,20 +595,23 @@ Hello Boas
 
 #### Quoting: single vs. double quotes
 
-What happens when we use single quotes instead?
+What happens when we use single quotes instead of double quotes around variables?
 
+
+
+::: {.callout-note collapse="true" title="Answer" icon="false"}
 ```bash
 echo "$GREETING $NAME"
 echo '$GREETING $NAME'
 ```
+returns:
 
-::: {.callout-note collapse="true" title="Answer" icon="false"}
 ```
 Hello Boas
 $GREETING $NAME
 ```
 
-Single quotes **do not** evaluate variables, while double quotes **do**.
+Single quotes **do not** expand variables, while double quotes **do**.
 :::
 
 ---
@@ -617,7 +629,7 @@ cp $FILENAME temp/
 What happens?
 
 ::: {.callout-note collapse="true" title="Answer" icon="false"}
-This will try to copy **two** files: `sequences/complex` and `name.fasta`, which likely don't exist!
+This will try to copy **two** files: `sequences/complex` and `name.fasta`, which don't exist!
 :::
 
 The correct approach is:
@@ -650,9 +662,12 @@ ls sequences/*.fasta
 
 What if we only want files that start with `sample`?
 
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+
 ```bash
 ls sequences/sample*.fasta
 ```
+:::
 
 Which sample is not found using the below code?
 
@@ -680,7 +695,7 @@ nano loop_sequences.sh
 
 Paste the following into the file:
 
-```
+```bash
 #!/bin/bash
 
 for file in sequences/*.fasta
@@ -689,7 +704,7 @@ do
 done
 ```
 
-Save and exit (`Ctrl+O`, `Enter`, then `Ctrl+X`).
+Save and exit (`Ctrl+S`, then `Ctrl+X`).
 
 Then run the script using:
 
@@ -745,8 +760,29 @@ Processing file: sequences/sample404.fasta
 The file `sample2.fasta` contains the most lines (6).
 :::
 
+Can you explain what every line is doing in this for loop?
 
-## Conclusions
+::: {.callout-note collapse="true" title="Answer" icon="false"}
+```bash
+for file in sequences/*.fasta  # <1>
+do  # <2>
+  echo "Processing file: $file"  # <3>
+  wc -l "$file" | cut -d' ' -f1  # <4>
+done  # <5>
+```
+1. Finds all files matching the pattern `sequences/*.fasta` and stores them in the variable `$file` one by one
+2. Needed in a for loop, indicates the start of repeated commands
+3. Prints the file name to the screen 
+4. Uses `wc -l` to count the number of lines per file, pipes this into `cut` which then extracts the first field, using a space as separator.
+5. Needed in a for loop, indicates the end of the repeated commands
+:::
+
+
+## Further exercises
+
+If you're done early and want to check out some extra stuff that makes shell scripting much more powerful, check out:
+- Lessons 6 and 7 of https://carpentry.library.ucsb.edu/CustomLibraryBash/
+- Any extra material from https://carpentries-incubator.github.io/shell-extras/
 
 
 ## References
