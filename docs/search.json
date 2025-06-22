@@ -40,7 +40,7 @@
     "href": "resources/shell-tutorial.html#further-exercises",
     "title": "Shell tutorial",
     "section": "3 Further exercises",
-    "text": "3 Further exercises\nIf you’re done early and want to check out some extra stuff that makes shell scripting much more powerful, check out: - Lessons 6 and 7 of https://carpentry.library.ucsb.edu/CustomLibraryBash/ - Any extra material from https://carpentries-incubator.github.io/shell-extras/",
+    "text": "3 Further exercises\nIf you’re done early and want to check out some extra stuff that makes shell scripting much more powerful, check out:\n\nLessons 6 and 7 of https://carpentry.library.ucsb.edu/CustomLibraryBash/\nAny extra material from https://carpentries-incubator.github.io/shell-extras/",
     "crumbs": [
       "Home",
       "Resources",

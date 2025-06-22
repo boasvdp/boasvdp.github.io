@@ -50,7 +50,7 @@ Commands are run by typing them and pressing "Enter". You can move the cursor us
 
 Download the zip file with the exercises from the link in the right sidebar. Either download by left-clicking and save this in your Linux home directory, or use these commands:
 
-```
+```bash
 cd
 wget https://github.com/boasvdp/boasvdp.github.io/raw/refs/heads/main/files/shell-tutorial.zip
 unzip shell-tutorial.zip
@@ -354,7 +354,7 @@ Check the result again with `ls`.
 
 What would happen if you ran the `mv` command with an existing file name?
 
-::: {.callout-tip collapse="true" title="Answer" icon="false"}
+::: {.callout-note collapse="true" title="Answer" icon="false"}
 The existing file would be overwritten without warning unless you use the `-i` (interactive) option:
 
 ```bash
@@ -781,8 +781,9 @@ done  # <5>
 ## Further exercises
 
 If you're done early and want to check out some extra stuff that makes shell scripting much more powerful, check out:
-- Lessons 6 and 7 of https://carpentry.library.ucsb.edu/CustomLibraryBash/
-- Any extra material from https://carpentries-incubator.github.io/shell-extras/
+
+- Lessons 6 and 7 of [https://carpentry.library.ucsb.edu/CustomLibraryBash/](https://carpentry.library.ucsb.edu/CustomLibraryBash/)
+- Any extra material from [https://carpentries-incubator.github.io/shell-extras/](https://carpentries-incubator.github.io/shell-extras/)
 
 
 ## References
