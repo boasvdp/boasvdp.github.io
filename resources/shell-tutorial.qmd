@@ -4,8 +4,6 @@ toc: true
 toc-depth: 3
 toc-expand: true
 sidebar: false
-number-sections: true
-number-depth: 3
 code-annotations: below
 callout-appearance: simple
 linestretch: 2
@@ -21,6 +19,12 @@ This page lays out the exercises to learn shell scripting. The exercises are als
 A lot of material has been adapted from existing resources such as Data Carpentry's "Introduction to the Command Line for Genomics"[^1] and Software Carpentry's "The Unix Shell"[^2].
 
 ### The command line
+
+::: {.callout-tip}
+When doing these exercises, make sure you're using a Linux shell and not the Windows Powershell!
+
+You can confirm you're using bash or another Linux shell by running this code: `echo $0`. This should return the name of the shell you're running (e.g. `bash`)
+:::
 
 Your command line interface probably looks something like this:
 
@@ -58,7 +62,7 @@ cd shell-tutorial
  
 ```
 
-### Navigating a file system
+### 1. Navigating a file system
 
 These couple of exercises will demonstrate how you can move throughout your file system.
 
@@ -177,16 +181,18 @@ Remembering the `project_A` directory is "next to" the `project_B` directory, ho
 ```bash
 cd /home/boas/shell-tutorial/01_navigation/project_A
 ```
-Where `boas` is replaced by your username.
+::: {.callout-warning}
+Replace `boas` in this example by your own user name!
+:::
 
 When getting acquainted with navigating file systems, it might help to draw a (mental) picture of the system like this:
 
 ![Absolute path example](../img/shell-tutorial/abspath.png){width=400}
 :::
 
-### Viewing and changing files
+### 2. Viewing and changing files
 
-First, navigate to the `02_files` directory for the following exercises. 
+**First**, navigate to the `02_files` directory for the following exercises. 
 
 #### Printing the contents of a file
 
@@ -452,7 +458,7 @@ mv file.txt directory1/other_file.txt # <3>
 :::
 
 
-### Pipes and redirection
+### 3. Pipes and redirection
 
 In this section, we’ll learn how to redirect output into files and how to use pipes to chain commands together. The files needed for these exercises are in the directory `03_pipes`.
 
@@ -558,7 +564,7 @@ The most common date is `2025-06-26`, which appears 5 times.
 Bonus question: can you sort this output on a descending number of cases? Check `man sort` for some ideas.
 :::
 
-### Scripting
+### 4. Scripting
 
 Navigate to `04_scripting` for these exercises.
 
@@ -696,8 +702,6 @@ nano loop_sequences.sh
 Paste the following into the file:
 
 ```bash
-#!/bin/bash
-
 for file in sequences/*.fasta
 do
   echo "Processing file: $file"

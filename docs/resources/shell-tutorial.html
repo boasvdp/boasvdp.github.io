@@ -152,20 +152,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background"><span class="header-section-number">1</span> Background</a>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a>
   <ul class="collapse">
-  <li><a href="#the-command-line" id="toc-the-command-line" class="nav-link" data-scroll-target="#the-command-line"><span class="header-section-number">1.1</span> The command line</a></li>
-  <li><a href="#practical-tips" id="toc-practical-tips" class="nav-link" data-scroll-target="#practical-tips"><span class="header-section-number">1.2</span> Practical tips</a></li>
+  <li><a href="#the-command-line" id="toc-the-command-line" class="nav-link" data-scroll-target="#the-command-line">The command line</a></li>
+  <li><a href="#practical-tips" id="toc-practical-tips" class="nav-link" data-scroll-target="#practical-tips">Practical tips</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2</span> Exercises</a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#navigating-a-file-system" id="toc-navigating-a-file-system" class="nav-link" data-scroll-target="#navigating-a-file-system"><span class="header-section-number">2.1</span> Navigating a file system</a></li>
-  <li><a href="#viewing-and-changing-files" id="toc-viewing-and-changing-files" class="nav-link" data-scroll-target="#viewing-and-changing-files"><span class="header-section-number">2.2</span> Viewing and changing files</a></li>
-  <li><a href="#pipes-and-redirection" id="toc-pipes-and-redirection" class="nav-link" data-scroll-target="#pipes-and-redirection"><span class="header-section-number">2.3</span> Pipes and redirection</a></li>
-  <li><a href="#scripting" id="toc-scripting" class="nav-link" data-scroll-target="#scripting"><span class="header-section-number">2.4</span> Scripting</a></li>
+  <li><a href="#navigating-a-file-system" id="toc-navigating-a-file-system" class="nav-link" data-scroll-target="#navigating-a-file-system">1. Navigating a file system</a></li>
+  <li><a href="#viewing-and-changing-files" id="toc-viewing-and-changing-files" class="nav-link" data-scroll-target="#viewing-and-changing-files">2. Viewing and changing files</a></li>
+  <li><a href="#pipes-and-redirection" id="toc-pipes-and-redirection" class="nav-link" data-scroll-target="#pipes-and-redirection">3. Pipes and redirection</a></li>
+  <li><a href="#scripting" id="toc-scripting" class="nav-link" data-scroll-target="#scripting">4. Scripting</a></li>
   </ul></li>
-  <li><a href="#further-exercises" id="toc-further-exercises" class="nav-link" data-scroll-target="#further-exercises"><span class="header-section-number">3</span> Further exercises</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4</span> References</a></li>
+  <li><a href="#further-exercises" id="toc-further-exercises" class="nav-link" data-scroll-target="#further-exercises">Further exercises</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://github.com/boasvdp/boasvdp.github.io/raw/refs/heads/main/files/shell-tutorial.zip"><i class="bi bi-link-45deg"></i>Exercise zip data</a></li></ul></div></nav>
     </div>
@@ -191,20 +191,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="background" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="background"><span class="header-section-number">1</span> Background</h2>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>This page lays out the exercises to learn shell scripting. The exercises are also used in the PHM III course for the ECDC fellowship.</p>
 <p>A lot of material has been adapted from existing resources such as Data Carpentry’s “Introduction to the Command Line for Genomics”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and Software Carpentry’s “The Unix Shell”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<section id="the-command-line" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="the-command-line"><span class="header-section-number">1.1</span> The command line</h3>
+<section id="the-command-line" class="level3">
+<h3 class="anchored" data-anchor-id="the-command-line">The command line</h3>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>When doing these exercises, make sure you’re using a Linux shell and not the Windows Powershell!</p>
+<p>You can confirm you’re using bash or another Linux shell by running this code: <code>echo $0</code>. This should return the name of the shell you’re running (e.g.&nbsp;<code>bash</code>)</p>
+</div>
+</div>
+</div>
 <p>Your command line interface probably looks something like this:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">boas@mycomputer:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>$</code> sign indicates the “prompt” and means that the shell is waiting for your input. The text before the <code>$</code> provides some basic information, usually which user is logged in (<code>boas</code>) at which machine (<code>mycomputer</code>) and what the current directory is (<code>~</code> or “home”, we’ll get to what that means).</p>
 <p>Most shells also have a “cursor”, which indicates where typed text will appear. Usually, the cursor is a flashing block or line.</p>
 <p>Commands are run by typing them and pressing “Enter”. You can move the cursor using left and right arrows. In most shells, you can <strong>not</strong> change the position of the cursor by clicking with your mouse.</p>
 </section>
-<section id="practical-tips" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="practical-tips"><span class="header-section-number">1.2</span> Practical tips</h3>
+<section id="practical-tips" class="level3">
+<h3 class="anchored" data-anchor-id="practical-tips">Practical tips</h3>
 <ul>
 <li><strong>Copying and pasting</strong>: You can copy text from the command line by selecting it with your mouse. To paste, right-click in the terminal window.</li>
 <li><strong>Command history</strong>: You can use the up and down arrow keys to scroll through your command history. This is useful for repeating commands or correcting mistakes.</li>
@@ -220,16 +231,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="exercises" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2</span> Exercises</h2>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <p>Download the zip file with the exercises from the link in the right sidebar. Either download by left-clicking and save this in your Linux home directory, or use these commands:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/boasvdp/boasvdp.github.io/raw/refs/heads/main/files/shell-tutorial.zip</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> shell-tutorial.zip</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> shell-tutorial</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="navigating-a-file-system" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="navigating-a-file-system"><span class="header-section-number">2.1</span> Navigating a file system</h3>
+<section id="navigating-a-file-system" class="level3">
+<h3 class="anchored" data-anchor-id="navigating-a-file-system">1. Navigating a file system</h3>
 <p>These couple of exercises will demonstrate how you can move throughout your file system.</p>
 <section id="check-your-current-working-directory" class="level4">
 <h4 class="anchored" data-anchor-id="check-your-current-working-directory">Check your current working directory</h4>
@@ -377,7 +388,16 @@ Answer
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/boas/shell-tutorial/01_navigation/project_A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Where <code>boas</code> is replaced by your username.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Replace <code>boas</code> in this example by your own user name!</p>
+</div>
+</div>
+</div>
 <p>When getting acquainted with navigating file systems, it might help to draw a (mental) picture of the system like this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -390,9 +410,9 @@ Answer
 </div>
 </section>
 </section>
-<section id="viewing-and-changing-files" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="viewing-and-changing-files"><span class="header-section-number">2.2</span> Viewing and changing files</h3>
-<p>First, navigate to the <code>02_files</code> directory for the following exercises.</p>
+<section id="viewing-and-changing-files" class="level3">
+<h3 class="anchored" data-anchor-id="viewing-and-changing-files">2. Viewing and changing files</h3>
+<p><strong>First</strong>, navigate to the <code>02_files</code> directory for the following exercises.</p>
 <section id="printing-the-contents-of-a-file" class="level4">
 <h4 class="anchored" data-anchor-id="printing-the-contents-of-a-file">Printing the contents of a file</h4>
 <p>Let’s start with some basic file inspection tools.</p>
@@ -715,8 +735,8 @@ Answer
 </div>
 </section>
 </section>
-<section id="pipes-and-redirection" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="pipes-and-redirection"><span class="header-section-number">2.3</span> Pipes and redirection</h3>
+<section id="pipes-and-redirection" class="level3">
+<h3 class="anchored" data-anchor-id="pipes-and-redirection">3. Pipes and redirection</h3>
 <p>In this section, we’ll learn how to redirect output into files and how to use pipes to chain commands together. The files needed for these exercises are in the directory <code>03_pipes</code>.</p>
 <section id="redirecting-output" class="level4">
 <h4 class="anchored" data-anchor-id="redirecting-output">Redirecting output</h4>
@@ -857,8 +877,8 @@ Answer
 </div>
 </section>
 </section>
-<section id="scripting" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="scripting"><span class="header-section-number">2.4</span> Scripting</h3>
+<section id="scripting" class="level3">
+<h3 class="anchored" data-anchor-id="scripting">4. Scripting</h3>
 <p>Navigate to <code>04_scripting</code> for these exercises.</p>
 <section id="variables" class="level4">
 <h4 class="anchored" data-anchor-id="variables">Variables</h4>
@@ -1021,12 +1041,10 @@ Answer
 <p>Open the script using nano:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> loop_sequences.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Paste the following into the file:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> sequences/<span class="pp">*</span>.fasta</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Processing file: </span><span class="va">$file</span><span class="st">"</span></span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> sequences/<span class="pp">*</span>.fasta</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Processing file: </span><span class="va">$file</span><span class="st">"</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Save and exit (<code>Ctrl+S</code>, then <code>Ctrl+X</code>).</p>
 <p>Then run the script using:</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> loop_sequences.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1134,16 +1152,16 @@ Answer
 </section>
 </section>
 </section>
-<section id="further-exercises" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="further-exercises"><span class="header-section-number">3</span> Further exercises</h2>
+<section id="further-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="further-exercises">Further exercises</h2>
 <p>If you’re done early and want to check out some extra stuff that makes shell scripting much more powerful, check out:</p>
 <ul>
 <li>Lessons 6 and 7 of <a href="https://carpentry.library.ucsb.edu/CustomLibraryBash/">https://carpentry.library.ucsb.edu/CustomLibraryBash/</a></li>
 <li>Any extra material from <a href="https://carpentries-incubator.github.io/shell-extras/">https://carpentries-incubator.github.io/shell-extras/</a></li>
 </ul>
 </section>
-<section id="references" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="references"><span class="header-section-number">4</span> References</h2>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 
 
 </section>
